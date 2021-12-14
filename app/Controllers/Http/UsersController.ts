@@ -32,10 +32,10 @@ export default class UsersController {
       schema: userSchema,
       messages: {
         'required' : '{{ field }} is required.',
-        'unique': 'Username is duplicate, try again.'
+        'unique': 'Username is duplicate, try again.',
+        'confirmed': 'Password is not match, try again.'
       }
     })
-
 
     try{
       const user = await User.create(payload)
