@@ -29,4 +29,7 @@ Route.group(() => {
   Route.get('users', 'UsersController.index')
   Route.post('users/register', 'UsersController.store')
 
+  //category
+  Route.resource('category', 'CategoriesController').apiOnly()
+
 }).prefix('api')
