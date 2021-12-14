@@ -26,6 +26,7 @@ Route.get('/', async () => {
 
 Route.group(() => {
   //user
-  Route.resource('users', 'UsersController').apiOnly()
+  Route.get('users', 'UsersController.index')
+  Route.post('users/register', 'UsersController.store')
 
 }).prefix('api')
