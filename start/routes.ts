@@ -25,9 +25,16 @@ Route.get('/', async () => {
 })
 
 Route.group(() => {
+  //auth
+  Route.group(() => {
+    Route.post('login', 'AuthController.login')
+    Route.get('me', 'AuthController.me').middleware('auth')
+    Route.post('logout', 'AuthController.logout').middleware('auth')
+  }).prefix('auth')
+
   //user
   Route.get('users', 'UsersController.index')
-  Route.post('users/register', 'UsersController.store')
+  Route.post('users/register', 'AuthController.store')
 
   //category
   Route.resource('category', 'CategoriesController').apiOnly()
