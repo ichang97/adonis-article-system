@@ -32,4 +32,7 @@ Route.group(() => {
   //category
   Route.resource('category', 'CategoriesController').apiOnly()
 
+  //articles
+  Route.resource('articles', 'ArticlesController').apiOnly()
+
 }).prefix('api')
