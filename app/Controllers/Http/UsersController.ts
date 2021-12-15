@@ -8,8 +8,6 @@ export default class UsersController {
     return users
   }
 
-  public async create({}: HttpContextContract) {}
-
   public async store({ request, response }: HttpContextContract) {
     const userSchema = schema.create({
       firstname: schema.string(),
@@ -44,12 +42,4 @@ export default class UsersController {
       return response.status(500).send({result: 'error', message: e})
     }
   }
-
-  public async show({}: HttpContextContract) {}
-
-  public async edit({}: HttpContextContract) {}
-
-  public async update({}: HttpContextContract) {}
-
-  public async destroy({}: HttpContextContract) {}
 }
