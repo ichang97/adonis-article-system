@@ -28,7 +28,7 @@ export default class AuthController {
         }
     }
 
-    public async me({ response }: HttpContextContract){
+    public async me({ auth, response }: HttpContextContract){
         const redisData = await Redis.get('USERS_DATA')
 
         if(redisData){
@@ -36,7 +36,7 @@ export default class AuthController {
             console.log(redisData)
             return response.status(200).send({data: {user: userData}})
         }else{
-            return response.status(404).send({result: 'error', message: 'no user data in redis.'})
+            return response.status(200).send({data: {user: auth.user}})
         }
     }
 
