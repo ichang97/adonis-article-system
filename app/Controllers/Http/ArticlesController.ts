@@ -15,7 +15,10 @@ export default class ArticlesController {
       const articleRedis = await Redis.get('ARTICLES')
       console.log(articleRedis)
 
-      return response.status(200).send({result: 'success', data: articleRedis})
+      if(articleRedis){
+        return response.status(200).send({result: 'success', data: JSON.parse(articleRedis)})
+      }
+      
     }catch(e){
       return response.status(500).send({result: 'error', message: e})
     }
