@@ -3,12 +3,19 @@ import Article from 'App/Models/Article'
 import ArticleCategory from 'App/Models/ArticleCategory'
 import { schema } from '@ioc:Adonis/Core/Validator'
 import Drive from '@ioc:Adonis/Core/Drive'
+import Redis from '@ioc:Adonis/Addons/Redis'
 
 export default class ArticlesController {
   public async index({ response }: HttpContextContract) {
     try{
       const articles = await Article.all()
-      return response.status(200).send({result: 'success', data: articles})
+
+      //store articles into redis
+      await Redis.set('ARTICLES', JSON.stringify(articles))
+      const articleRedis = await Redis.get('ARTICLES')
+      console.log(articleRedis)
+
+      return response.status(200).send({result: 'success', data: articleRedis})
     }catch(e){
       return response.status(500).send({result: 'error', message: e})
     }
