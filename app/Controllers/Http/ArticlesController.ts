@@ -17,6 +17,8 @@ export default class ArticlesController {
 
       if(articleRedis){
         return response.status(200).send({result: 'success', data: JSON.parse(articleRedis)})
+      }else{
+        return response.status(200).send({result: 'success', data: articles})
       }
       
     }catch(e){
